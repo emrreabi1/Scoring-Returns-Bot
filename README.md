@@ -77,12 +77,12 @@ This bot uses the API-Football service. Make sure you comply with their terms of
 
 ## Featured Images
 
-<div align="center">
-  <img src="assets/images/bot1.png" alt="Bot Preview 1" width="300"/>
-  <img src="assets/images/bot2.png" alt="Bot Preview 2" width="300"/>
-  <img src="assets/images/bot3.png" alt="Bot Preview 3" width="300"/>
-  <img src="assets/images/bot4.png" alt="Bot Preview 4" width="300"/>
-  <img src="assets/images/bot5.png" alt="Bot Preview 5" width="300"/>
+<div align="center" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0;">
+  <img src="assets/images/bot1.png" alt="Bot Preview 1" style="width: 100%; max-width: 400px;"/>
+  <img src="assets/images/bot2.png" alt="Bot Preview 2" style="width: 100%; max-width: 400px;"/>
+  <img src="assets/images/bot3.png" alt="Bot Preview 3" style="width: 100%; max-width: 400px;"/>
+  <img src="assets/images/bot4.png" alt="Bot Preview 4" style="width: 100%; max-width: 400px;"/>
+  <img src="assets/images/bot5.png" alt="Bot Preview 5" style="width: 100%; max-width: 400px;"/>
 </div>
 
 ## License
