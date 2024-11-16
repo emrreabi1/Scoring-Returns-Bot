@@ -1,11 +1,7 @@
 <div align="center">
   <h1>Football Live Score Discord Bot</h1>
   <br/>
-
-  <img src="assets/bot1.png" alt="Bot Preview 1" width="300"/>
-  <img src="assets/bot2.png" alt="Bot Preview 2" width="300"/>
-  <img src="assets/bot3.png" alt="Bot Preview 3" width="300"/>
-
+  
   <p><i>A powerful Discord bot that tracks live football matches and provides real-time updates, statistics, and events, similar to popular sports platforms like FlashScore and LiveScore. <br/>Created by <a href="https://x.com/bernKing20">@bernKing20</a>.</i></p>
   <br />
 </div>
@@ -78,6 +74,14 @@ For a detailed explanation of the project, visit the full write-up at [my blog](
 
 ## Disclaimer
 This bot uses the API-Football service. Make sure you comply with their terms of service and have appropriate API access.
+
+## Featured Images
+
+<div align="center">
+  <img src="assets/images/bot1.png" alt="Bot Preview 1" width="300"/>
+  <img src="assets/images/bot2.png" alt="Bot Preview 2" width="300"/>
+  <img src="assets/images/bot3.png" alt="Bot Preview 3" width="300"/>
+</div>
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
