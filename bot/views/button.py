@@ -3,6 +3,7 @@ from discord.ui import Button, View
 from discord import ButtonStyle
 from datetime import datetime, timedelta
 import asyncio
+from configs.config import footer_text, footer_icon_url, embed_color, website_field_name, website_name, website_url
 
 class CombinedView(discord.ui.View):
 
@@ -92,7 +93,6 @@ class CombinedView(discord.ui.View):
 
         user_id = interaction.user.id
         now = datetime.now()
-        footer_icon_url = "https://i.imgur.com/JQsILIF.png"
 
         # Check if the user has clicked the button in the last 60 seconds
         if user_id in self.last_clicks_full_stats:
@@ -105,10 +105,9 @@ class CombinedView(discord.ui.View):
                     title="⌛ Time Out",
                     description=f"Please wait {int(remaining_time)} more seconds before clicking again.",
                     color=16776960,
-                    timestamp=datetime.now(),  # Fixed datetime call
+                    timestamp=datetime.now(),
                 )
-
-                embed1.set_footer(text="Scoring Returns", icon_url=footer_icon_url) 
+                embed1.set_footer(text=footer_text, icon_url=footer_icon_url)
 
                 await interaction.response.send_message(content = None, embed = embed1, view=None, ephemeral=True)
                 return
@@ -185,8 +184,8 @@ class CombinedView(discord.ui.View):
         embed1 = discord.Embed(
             title="⚽ Full Game Stats",
             description=f"**{home_team} vs {away_team}**\n> **Time Elapsed:** {time_elapsed} minutes\n> **Game Status:** {game_status}",
-            color=5763719,
-            timestamp=datetime.now(),  # Fixed datetime call
+            color=embed_color,
+            timestamp=datetime.now(),
         )
         
         if full_stats_string == "":
@@ -197,13 +196,13 @@ class CombinedView(discord.ui.View):
                         inline=False)
 
         embed1.add_field(
-            name="Check us out:",
-            value="> [scoringreturns.net](https://scoringreturns.net/)",
+            name=website_field_name,
+            value=f"> [{website_name}]({website_url})",
             inline=False,
         )
 
         embed1.set_thumbnail(url=league_image)
-        embed1.set_footer(text="Scoring Returns", icon_url=footer_icon_url) 
+        embed1.set_footer(text=footer_text, icon_url=footer_icon_url)
 
         await interaction.response.send_message(
             #Send Full Stats here
