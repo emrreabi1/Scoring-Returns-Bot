@@ -23,7 +23,8 @@ from configs.config import (
     website_url,
     website_field_name,
     LIVE_JSON_PATH,
-    BANNERS_PATH
+    BANNERS_PATH,
+    LOOP_WAIT_TIME
 )
 async def get_fixtures_statistics(fixture_id):
     """
@@ -208,7 +209,7 @@ async def get_fixtures_statistics(fixture_id):
 
     return [1, data_dict, 0, file, specific_fixture]
 
-async def information_presenter(live_stats_dict, bot, previous_size, specific_fixture, task_manager, author_id, announcment_id):
+async def information_presenter(live_stats_dict, bot, previous_size, specific_fixture, task_manager, author_id, announcment_id, logger):
     """
     Creates and updates Discord embeds with match information and events.
     
@@ -360,9 +361,15 @@ async def information_presenter(live_stats_dict, bot, previous_size, specific_fi
 
 
                 if bet_hit_channel is None:
-                    print("Channel does not exist. Exiting the function.")
-                else:
+                    logger.warning(f"Channel {announcment_id} not found")
+                    continue
+
+                try:
                     await bet_hit_channel.send(content=None, embed=event_embed)
+                except discord.Forbidden:
+                    logger.warning(f"Missing permissions to send messages in channel {announcment_id}")
+                except discord.HTTPException as e:
+                    logger.error(f"Failed to send event message: {e}")
 
     # Create the first embed
     embed1 = discord.Embed(
@@ -406,7 +413,7 @@ async def information_presenter(live_stats_dict, bot, previous_size, specific_fi
     
     return embed1, current_size
 
-async def game_status_func(bot, specific_fixture, live_stats_dict, announcment_id, game_moment):
+async def game_status_func(bot, specific_fixture, live_stats_dict, announcment_id, game_moment, logger):
     """
     Sends game status announcements to specified channel.
     
@@ -439,63 +446,71 @@ async def game_status_func(bot, specific_fixture, live_stats_dict, announcment_i
         if home_team in key or away_team in key:
             team_stats[key] = value
    
-    announcements_channel = bot.get_channel(announcment_id) 
-    
-    league_image = specific_fixture["response"][0]["league"]["logo"]
+    try:
+        announcements_channel = bot.get_channel(announcment_id)
+        if announcements_channel is None:
+            logger.warning(f"Channel {announcment_id} not found")
+            return
 
-    title_embed = ""
+        title_embed = ""
 
-    if game_moment == "Game Started":
-        title_embed = "🎉 Game Started 🎉"
-    
-    elif game_moment == "Halftime Reached":
-        title_embed = "⏳ Halftime Reached ⏳"
+        if game_moment == "Game Started":
+            title_embed = "🎉 Game Started 🎉"
         
-    elif game_moment == "Second Half Started":
-        title_embed = "🎉 Second Half Started 🎉"
+        elif game_moment == "Halftime Reached":
+            title_embed = "⏳ Halftime Reached ⏳"
         
-    elif game_moment == "Game Ended":
-        title_embed = "🏁 Game Ended 🏁"
-    
-    elif game_moment == "Break Time Reached":
-        title_embed = "⏳ Break Time Reached ⏳"
-    
-    elif game_moment == "Extra Time Started":
-        title_embed = "🎉 Second Half Started 🎉"
+        elif game_moment == "Second Half Started":
+            title_embed = "🎉 Second Half Started 🎉"
+        
+        elif game_moment == "Game Ended":
+            title_embed = "🏁 Game Ended 🏁"
+        
+        elif game_moment == "Break Time Reached":
+            title_embed = "⏳ Break Time Reached ⏳"
+        
+        elif game_moment == "Extra Time Started":
+            title_embed = "🎉 Second Half Started 🎉"
 
-    elif game_moment == "Penalty Started":
-        title_embed = "🎉 Penalty Started 🎉"
+        elif game_moment == "Penalty Started":
+            title_embed = "🎉 Penalty Started 🎉"
 
-    game_status = discord.Embed(
-        title=title_embed,
-        color=embed_color,
-        timestamp=datetime.now(),
-    )
+        game_status = discord.Embed(
+            title=title_embed,
+            color=embed_color,
+            timestamp=datetime.now(),
+        )
 
-    # Add the game information
-    game_status.add_field(
-        name=f"**{home_team} vs {away_team}**\n",
-        value = f"> **Result:** {team_stats.get(f'{home_team} Goals')} - {team_stats.get(f'{away_team} Goals')}",
-        inline=False,
-    )
-    
-    game_status.set_thumbnail(url=league_image)
-    game_status.set_footer(
-        text=footer_text, icon_url=footer_icon_url 
-    )
+        # Add the game information
+        game_status.add_field(
+            name=f"**{home_team} vs {away_team}**\n",
+            value = f"> **Result:** {team_stats.get(f'{home_team} Goals')} - {team_stats.get(f'{away_team} Goals')}",
+            inline=False,
+        )
+        
+        league_image = specific_fixture["response"][0]["league"]["logo"]
 
-    file = discord.File(
-        f"{BANNERS_PATH}/{home_team}vs{away_team}.png",
-        filename="image.png",
-    )
-    # Set the image in the embed to reference the uploaded file by using `attachment://filename`
-    game_status.set_image(url="attachment://image.png")
+        
+        game_status.set_thumbnail(url=league_image)
+        game_status.set_footer(
+            text=footer_text, icon_url=footer_icon_url 
+        )
 
-    if announcements_channel is None:
-        print("Channel does not exist. Exiting the function.")
+        file = discord.File(
+            f"{BANNERS_PATH}/{home_team}vs{away_team}.png",
+            filename="image.png",
+        )
+        # Set the image in the embed to reference the uploaded file by using `attachment://filename`
+        game_status.set_image(url="attachment://image.png")
 
-    else:
         await announcements_channel.send(content=None, embed=game_status, file=file)
+        
+    except discord.Forbidden:
+        logger.warning(f"Missing permissions to send messages in channel {announcment_id}")
+    except discord.HTTPException as e:
+        logger.error(f"Failed to send game status message: {e}")
+    except Exception as e:
+        logger.error(f"Unexpected error sending game status: {e}")
 
 async def only_stats_main(bot, initial_message, fixture_id, author_id, task_manager, previous_attachments, announcment_id, channel_id):
     """
@@ -579,7 +594,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                         embed=embed_before_game,
                         view=all_buttons,
                     )
-                    print("Initial message edited for game not started.")
+                    logger.debug("Initial message edited for game not started.")
                     break  # Break out of the loop if successful
                 except discord.NotFound as e:
                     logger.info(f"An error occurred: {e}. Exiting the function.")
@@ -602,7 +617,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
             # Instead of sleeping for 5 minutes straight, check more frequently
             not_started_wait_time = 54000  # 15 hours of total wait time
             check_interval_long = 3600  # Interval to re-check the game status when it's more than 1 hour until game start
-            check_interval_short = 45  # Interval to re-check the game status when it's less than 1 hour until game start            check_interval_long = 3600  # Interval to re-check the game status when it's more than 1 hour until game start
+            check_interval_short = LOOP_WAIT_TIME  # Changed from 45
             
             elapsed_time = 0
             starting_date_str = specific_fixture["response"][0]["fixture"]["date"]
@@ -631,7 +646,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
 
                 # dd/mm/YY H:M:S
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-                print(f"\n\nGame Not Started.{live_stats_dict[0]}Last check at: {dt_string}\n\n")
+                logger.debug(f"Game Not Started.{live_stats_dict[0]} Last check at: {dt_string}")
                 logger.info(f"Game Not Started.{live_stats_dict[0]}\nWaiting: {sleep_interval} seconds.")
 
                 """-------"""
@@ -656,7 +671,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                             embed=embed_before_game,
                             view=all_buttons,
                         )
-                        print("Initial message edited for game not started.")
+                        logger.debug("Initial message edited for game not started.")
                         break  # Break out of the loop if successful
                     except discord.NotFound as e:
                         logger.info(f"An error occurred: {e}. Exiting the function.")
@@ -675,11 +690,11 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                             return  # Exiting after max retries
 
 
-                print("\n\n", live_stats_dict[0], "\n\n")
+                logger.debug(f"Current game status: {live_stats_dict[0]}")
                 if 1 == live_stats_dict[0]:
                     
                     '''Send 1H Start Here!'''
-                    await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Game Started")
+                    await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Game Started", logger)
                     
                     
                     break  # Exit the loop if game status is no longer "Game Not Started!"
@@ -694,7 +709,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                 return
 
         embed1, previous_size = await information_presenter(
-            live_stats_dict[1], bot, previous_size, specific_fixture, task_manager, author_id, announcment_id
+            live_stats_dict[1], bot, previous_size, specific_fixture, task_manager, author_id, announcment_id, logger
         )
         
         #Ported Function to it's own function
@@ -707,9 +722,9 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
             
             
             if live_stats_dict[1].get("Game Status") == "HT":
-                await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Halftime Reached")
+                await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Halftime Reached", logger)
             elif live_stats_dict[1].get("Game Status") == "BT":
-                await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Break Time Reached")
+                await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Break Time Reached", logger)
             
             
             retry_count = 0
@@ -722,7 +737,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                         embed=embed1,
                         view=all_buttons,
                     )
-                    print("Initial message edited for game not started.")
+                    logger.debug("Initial message edited for game not started.")
                     break  # Break out of the loop if successful
                 except discord.NotFound as e:
                     logger.info(f"An error occurred: {e}. Exiting the function.")
@@ -761,11 +776,11 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                     
                     '''Send 2H Start Here!'''
                     if live_stats_dict[1].get("Game Status") == "2H":    
-                        await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Second Half Started")
+                        await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Second Half Started", logger)
                     elif live_stats_dict[1].get("Game Status") == "ET":
-                        await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Extra Time Started")
+                        await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Extra Time Started", logger)
                     elif live_stats_dict[1].get("Game Status") == "P":
-                        await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Penalty Started")
+                        await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Penalty Started", logger)
                     
                     break  # Exit the loop if game status is no longer "HT"
 
@@ -781,7 +796,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                         embed=embed1,
                         view=all_buttons,
                     )
-                    print("Initial message edited for game not started.")
+                    logger.debug("Initial message edited for game not started.")
                     break  # Break out of the loop if successful
                 except discord.NotFound as e:
                     logger.info(f"An error occurred: {e}. Exiting the function.")
@@ -801,7 +816,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
             
             
             '''Send Final  Game here!'''
-            await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Game Ended")
+            await game_status_func(bot, specific_fixture, live_stats_dict[1],announcment_id, "Game Ended", logger)
             
             logger.info(
                 f"Game Ended Last check at: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
@@ -821,7 +836,7 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                         embed=embed1,
                         view=all_buttons,
                     )
-                    print("Initial message edited for game not started.")
+                    logger.debug("Initial message edited for game not started.")
                     break  # Break out of the loop if successful
                 except discord.NotFound as e:
                     logger.info(f"An error occurred: {e}. Exiting the function.")
@@ -843,5 +858,5 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
                 f"Game in Progress: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
             )
 
-        await asyncio.sleep(45)
+        await asyncio.sleep(LOOP_WAIT_TIME)  # Changed from 45
 

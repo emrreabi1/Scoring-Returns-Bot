@@ -36,8 +36,13 @@ from configs.config import (
     BOT_TOKEN
 )
 
+from common_utils.time_logging import configure_logging
+
 intents = discord.Intents.default()
 bot = commands.Bot(intents=intents)
+
+# Create a logger for the bot
+bot_logger = configure_logging("bot_main", "system")
 
 #Teams Organizer
 teams_organizer = TeamsOrganizer()
@@ -52,6 +57,7 @@ task_manager = TaskManager()
     description="Check the bot's latency"
 )
 async def ping(ctx):
+    bot_logger.info(f"Ping command used by {ctx.author} (ID: {ctx.author.id})")
     # Check if the command is used in a DM
     if ctx.guild is None:
         return
@@ -89,6 +95,7 @@ async def team_schedule(
     ctx,
     team_name: Option(str, "Choose a football team", autocomplete=team_autocomplete),
 ):
+    bot_logger.info(f"Next_game command used by {ctx.author} (ID: {ctx.author.id}) for team: {team_name}")
     def extract_datetime_european_format(date_str):
         # Parse the date string to a datetime object
         date_obj = datetime.fromisoformat(date_str)
@@ -157,8 +164,17 @@ async def team_following(
     team_name: Option(str, "Choose a football team", autocomplete=team_autocomplete),
     events_id: Option(str, "Enter the announcements channel id:", required=False, default=0)
 ):
-
+    bot_logger.info(f"Follow command used by {ctx.author} (ID: {ctx.author.id}) for team: {team_name}")
     if ctx.guild is None:
+        return
+
+    # Check bot permissions in the channel
+    permissions = ctx.channel.permissions_for(ctx.guild.me)
+    if not (permissions.send_messages and permissions.embed_links and permissions.attach_files):
+        await ctx.respond(
+            "❌ I don't have the required permissions in this channel. Please make sure I have permissions to:\n> • Send Messages\n> • Embed Links\n> • Attach Files", 
+            ephemeral=True
+        )
         return
 
     if team_name not in teams_organizer.football_teams:
@@ -169,47 +185,56 @@ async def team_following(
 
     team_league = teams_organizer.find_team_id(team_name)
     fixture_id, fixture_date = teams_organizer.new_find_next_fixture(team_league)
-    # Assuming fixture_id returns the (id, date)
 
-    home_team, away_team = get_team_names_from_fixture(
-        fixture_id
-    )  # Assuming this is defined elsewhere
+    home_team, away_team = get_team_names_from_fixture(fixture_id)
 
     user_id = ctx.author.id
 
     task_manager_string = f"{home_team} vs {away_team}"
 
     if task_manager.new_get_task_count(user_id) < MAX_SIMULTANEOUS_GAMES:
-        task_manager.new_add_task(user_id, task_manager_string)
-
+        # Move task addition after successful message send
         thread_opening_embed, team_logos = get_thread_embed(fixture_id, 1)
-        
+
         await ctx.respond(
             f"✅ **{team_name}** chosen successfully and the task is being processed!"
         )
-        
+
         channel = ctx.channel 
         channel_id = channel.id
 
-        initial_message = await channel.send(
-            content=None, embed=thread_opening_embed, file=team_logos)
+        try:
+            initial_message = await channel.send(
+                content=None, embed=thread_opening_embed, file=team_logos
+            )
+            # Only add the task if message was sent successfully
+            task_manager.new_add_task(user_id, task_manager_string)
+            
+            previous_attachments = initial_message.attachments
 
-        previous_attachments = initial_message.attachments
-
-        # Start the main function as a background task
-        # Pass the object message we just sent to the only_stats_main function
-        
-        print("\n\n")
-        print(events_id)
-        
-        print("\n\n")
-        
-        task = asyncio.create_task(
-            only_stats_main(bot, initial_message, fixture_id, user_id, task_manager, previous_attachments, int(events_id), channel_id)
-        )
-        
+            # Start the main function as a background task
+            task = asyncio.create_task(
+                only_stats_main(
+                    bot, 
+                    initial_message, 
+                    fixture_id, 
+                    user_id, 
+                    task_manager, 
+                    previous_attachments, 
+                    int(events_id), 
+                    channel_id
+                )
+            )
+        except discord.Forbidden:
+            await ctx.respond(
+                "❌ I couldn't send a message in this channel. Please check my permissions.", 
+                ephemeral=True
+            )
+            return
     else:
-        await ctx.respond(f"❌ You have reached the maximum number of concurrent tasks ({MAX_SIMULTANEOUS_GAMES}). Please wait for some to end.")
+        await ctx.respond(
+            f"❌ You have reached the maximum number of concurrent tasks ({MAX_SIMULTANEOUS_GAMES}). Please wait for some to end."
+        )
 
 #Current games command
 @bot.slash_command(
@@ -217,7 +242,7 @@ async def team_following(
     description="Check how many games you are following!"
 )
 async def current_games(ctx):
-    
+    bot_logger.info(f"Current_games command used by {ctx.author} (ID: {ctx.author.id})")
     if ctx.guild is None:
         return
     
@@ -267,10 +292,8 @@ async def current_games(ctx):
 @bot.event
 async def on_ready():
     game = discord.Game("with Football Live Games!")
-    
     await bot.change_presence(status=discord.Status.online, activity=game)
-            
-    print(f"{bot.user} is ready and online!")
+    bot_logger.info(f"{bot.user} is ready and online!")
 
 bot.run(
     BOT_TOKEN

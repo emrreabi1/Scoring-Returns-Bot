@@ -2,6 +2,7 @@ import json
 from datetime import datetime, timezone, timedelta
 import os
 from configs.config import FIXTURES_PATH, STANDINGS_PATH, FIXTURES_BY_LEAGUE_PATH, INFORMATION_PATH, TEAMS_PATH
+from common_utils.time_logging import configure_logging
 
 class TeamsOrganizer:
     def __init__(self):
@@ -16,6 +17,7 @@ class TeamsOrganizer:
 
         self.teams_fixtures_dict = {}
         self.fixtures_by_league  = {}  # New structure to hold fixtures by league
+        self.logger = configure_logging("teams_organizer", "system")
         self.new_load_teams()
         
 
@@ -107,7 +109,7 @@ class TeamsOrganizer:
                                 
 
                                     if team_id in [home_id, away_id]:
-                                        print(f"Team Found: {team_name}\n")
+                                        self.logger.info(f"Team Found: {team_name}")
                                         
                                         fixture_id = int(individual_fixture["fixture"]["id"])
                                         date = individual_fixture["fixture"]["date"]
@@ -135,7 +137,7 @@ class TeamsOrganizer:
                   
         for team_id in self.teams_fixtures_dict.keys():
         
-            print(f"Team Sorted: {team_id}\n")
+            self.logger.info(f"Team Sorted: {team_id}")
                         
             self.teams_fixtures_dict[team_id] = sorted(
             
@@ -177,14 +179,14 @@ class TeamsOrganizer:
         """Find the team's next game."""
         '''team_league = [team_id, league_id];; Only need team_id in this new organization format'''
         if not team_league:
-            print("\nTeam or league not found.")
+            self.logger.warning("Team or league not found.")
             return
 
         team_id, league_id = team_league
 
         team_fixtures = self.teams_fixtures_dict.get(team_id, [])
         if not team_fixtures:
-            print("\nNo fixtures found for this team or Team ID not found in the specified league.")
+            self.logger.warning("No fixtures found for this team or Team ID not found in the specified league.")
             return
         
         '''Add a loop  to iterate the list and grab the future game based on date, add 1 day folga'''
@@ -216,7 +218,7 @@ class TeamsOrganizer:
         - list: [team_id, league_id]
         - empty list: if team not found
         """
-        print("\n\n", team_name)
+        self.logger.debug(f"Looking up team ID for: {team_name}")
         """Find the team ID given the name input."""
         '''return [team_id , league_id]'''
         # Directly return the result or 0 if not found
