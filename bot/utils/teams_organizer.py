@@ -180,29 +180,32 @@ class TeamsOrganizer:
         '''team_league = [team_id, league_id];; Only need team_id in this new organization format'''
         if not team_league:
             self.logger.warning("Team or league not found.")
-            return
+            return None, None
 
         team_id, league_id = team_league
 
         team_fixtures = self.teams_fixtures_dict.get(team_id, [])
         if not team_fixtures:
             self.logger.warning("No fixtures found for this team or Team ID not found in the specified league.")
-            return
+            return None, None
         
         '''Add a loop  to iterate the list and grab the future game based on date, add 1 day folga'''
 
         # Current date in UTC and additional 1-day delay
         current_date_with_delay = datetime.now(timezone.utc) - timedelta(hours=4)
 
-        # Correcting for timezone awareness
+        # Find next game
         next_game = None
-  
         for fixture in team_fixtures:
-
             fixture_date = datetime.fromisoformat(fixture["date"])
             if fixture_date >= current_date_with_delay:
                 next_game = fixture
                 break
+        
+        # Add null check before returning
+        if next_game is None:
+            self.logger.info("No future games found for this team.")
+            return None, None
         
         return next_game["fixture_id"], next_game["date"]
 

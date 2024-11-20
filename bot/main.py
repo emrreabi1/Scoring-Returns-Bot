@@ -19,11 +19,12 @@ from common_utils.fixture_utils import get_team_names_from_fixture, get_thread_e
 import asyncio
 from datetime import datetime, timezone
 import time
+from threading import current_thread
 
-from utils.task_manager import TaskManager
-from utils.teams_organizer import TeamsOrganizer
+from bot.utils.task_manager import TaskManager
+from bot.utils.teams_organizer import TeamsOrganizer
 
-from services.bot_backend import only_stats_main
+from bot.services.bot_backend import only_stats_main
 
 from configs.config import (
     footer_icon_url, 
@@ -186,6 +187,11 @@ async def team_following(
     team_league = teams_organizer.find_team_id(team_name)
     fixture_id, fixture_date = teams_organizer.new_find_next_fixture(team_league)
 
+    # Add check for no future fixtures
+    if fixture_id is None or fixture_date is None:
+        await ctx.respond(f"❌ No upcoming matches found for **{team_name}**.")
+        return
+
     home_team, away_team = get_team_names_from_fixture(fixture_id)
 
     user_id = ctx.author.id
@@ -295,6 +301,16 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=game)
     bot_logger.info(f"{bot.user} is ready and online!")
 
-bot.run(
-    BOT_TOKEN
-)  # run the bot with the token
+async def close_bot():
+    await bot.close()
+
+async def start_bot():
+    try:
+        await bot.start(BOT_TOKEN)
+    except Exception as e:
+        bot_logger.error(f"Bot encountered an error: {e}")
+        raise
+
+if __name__ == "__main__":
+    # asyncio.run(start_bot())
+    bot.run(BOT_TOKEN)

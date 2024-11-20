@@ -1,18 +1,24 @@
-import os
 import sys
+import os
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).parent.parent))
+
+from configs.config import PROJECT_ROOT
 
 def get_executable_dir():
-    # Get the directory containing the executable
     if getattr(sys, 'frozen', False):
-        # Running as executable
-        return os.path.dirname(sys.executable)
+        # When frozen, use the directory where the executable is located
+        return os.path.dirname(os.path.realpath(sys.argv[0]))
+    
     else:
-        # Running as script
+        # When not frozen, use the script's parent directory
+            
         return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def create_directories():
-    # Get base directory (where executable is)
-    base_dir = get_executable_dir()
+    #base_dir = get_executable_dir()
+    base_dir = PROJECT_ROOT
     
     directories = [
         'images_helper_files',
@@ -31,4 +37,5 @@ def create_directories():
         print(f"Created directory: {full_path}")
 
 if __name__ == "__main__":
+    print(f"Base Directory: {PROJECT_ROOT}")
     create_directories()

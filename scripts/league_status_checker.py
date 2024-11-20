@@ -6,14 +6,19 @@ import requests
 import json
 from time import sleep, time
 from configs.config import base_url, headers, IMPORTANT_LEAGUES, LEAGUE_STATUS, FIXTURES_PATH, STANDINGS_PATH
+from scripts.setup_directories import get_executable_dir
 
-def get_league_status():
+
+
+def get_league_status(temp_dir=None):
     """
     Fetches current league status data from API and saves to JSON.
     
     Makes GET request to /leagues endpoint with:
     - season: 2024
     - current: true
+    Parameters:
+    - temp_dir (Path): Optional temporary directory for GUI mode
     
     Saves response to:
     {LEAGUE_STATUS}/league_status.json
@@ -24,14 +29,15 @@ def get_league_status():
 
     if response.status_code == 200:
         data = response.json()
-        file_name = LEAGUE_STATUS / "league_status.json"
-
+        file_name = (temp_dir / "league_status.json") if temp_dir else (LEAGUE_STATUS / "league_status.json")
+        print(f"Saving league status to: {file_name.absolute()}")
         with open(file_name, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
             
         print("League status fetched successfully.")
     else:
         print(f"Error fetching league status: {response.status_code}")
+        raise Exception(f"API request failed with status code {response.status_code}")
 
 def parse_status_fixtures_available():
     """
@@ -89,6 +95,7 @@ def get_fixtures_file(stats_availables, important_league):
         if response.status_code == 200:
             data = response.json()
             file_path = FIXTURES_PATH / f"{league_id}{league_name}.json"
+            print(f"Saving fixtures to: {file_path.absolute()}")
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
             print(f"Saved fixtures for {league_name}.")
@@ -121,6 +128,7 @@ def get_league_standings(stats_availables, important_league):
         if response.status_code == 200:
             data = response.json()
             file_name = STANDINGS_PATH / f"{league_id}{league_name}.json"
+            print(f"Saving standings to: {file_name.absolute()}")
             with open(file_name, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
             print(f"Saved standings for {league_name}.")
@@ -129,11 +137,17 @@ def get_league_standings(stats_availables, important_league):
     
     print("\nAll data fetched successfully.")
 
-get_league_status()
+if __name__ == "__main__":
+    
+    print(f"\nSaving data to:")
+    print(f"League Status: {LEAGUE_STATUS.absolute()}")
+    print(f"Fixtures: {FIXTURES_PATH.absolute()}")
+    print(f"Standings: {STANDINGS_PATH.absolute()}\n")
+    
+    get_league_status()
+    stats_availables = parse_status_fixtures_available()
+    important_league = IMPORTANT_LEAGUES
 
-stats_availables = parse_status_fixtures_available()
-
-important_league = IMPORTANT_LEAGUES
-
-get_league_standings(stats_availables, important_league)
-get_fixtures_file(stats_availables, important_league)
+    get_fixtures_file(stats_availables, important_league)
+    get_league_standings(stats_availables, important_league)
+    print("\nAll data fetched successfully.")

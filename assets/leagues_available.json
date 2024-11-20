@@ -1,0 +1,1812 @@
+{
+    "leagues": [
+        {
+            "id": 755,
+            "name": "Oberliga - Nordost-S\u00fcd"
+        },
+        {
+            "id": 754,
+            "name": "Oberliga - Nordost-Nord"
+        },
+        {
+            "id": 751,
+            "name": "Oberliga - Niederrhein"
+        },
+        {
+            "id": 752,
+            "name": "Oberliga - Rheinland-Pfalz / Saar"
+        },
+        {
+            "id": 753,
+            "name": "Oberliga - Baden-W\u00fcrttemberg"
+        },
+        {
+            "id": 747,
+            "name": "Oberliga - Westfalen"
+        },
+        {
+            "id": 85,
+            "name": "Regionalliga - Nordost"
+        },
+        {
+            "id": 745,
+            "name": "Oberliga - Hamburg"
+        },
+        {
+            "id": 86,
+            "name": "Regionalliga - SudWest"
+        },
+        {
+            "id": 83,
+            "name": "Regionalliga - Bayern"
+        },
+        {
+            "id": 938,
+            "name": "Oberliga - Bayern Nord"
+        },
+        {
+            "id": 87,
+            "name": "Regionalliga - West"
+        },
+        {
+            "id": 939,
+            "name": "Oberliga - Bayern S\u00fcd"
+        },
+        {
+            "id": 744,
+            "name": "Oberliga - Schleswig-Holstein"
+        },
+        {
+            "id": 484,
+            "name": "Frauenliga"
+        },
+        {
+            "id": 234,
+            "name": "Liga Nacional"
+        },
+        {
+            "id": 263,
+            "name": "Liga de Expansi\u00f3n MX"
+        },
+        {
+            "id": 506,
+            "name": "2. liga"
+        },
+        {
+            "id": 748,
+            "name": "Oberliga - Niedersachsen"
+        },
+        {
+            "id": 84,
+            "name": "Regionalliga - Nord"
+        },
+        {
+            "id": 138,
+            "name": "Serie C - Girone A"
+        },
+        {
+            "id": 943,
+            "name": "Serie C - Girone C"
+        },
+        {
+            "id": 942,
+            "name": "Serie C - Girone B"
+        },
+        {
+            "id": 419,
+            "name": "Premyer Liqa"
+        },
+        {
+            "id": 197,
+            "name": "Super League 1"
+        },
+        {
+            "id": 396,
+            "name": "Primera Division"
+        },
+        {
+            "id": 82,
+            "name": "Frauen Bundesliga"
+        },
+        {
+            "id": 139,
+            "name": "Serie A Women"
+        },
+        {
+            "id": 64,
+            "name": "Feminine Division 1"
+        },
+        {
+            "id": 750,
+            "name": "Oberliga - Hessen"
+        },
+        {
+            "id": 284,
+            "name": "Liga II"
+        },
+        {
+            "id": 410,
+            "name": "C-League"
+        },
+        {
+            "id": 63,
+            "name": "National 1"
+        },
+        {
+            "id": 307,
+            "name": "Pro League"
+        },
+        {
+            "id": 91,
+            "name": "Eredivisie Women"
+        },
+        {
+            "id": 297,
+            "name": "Thai League 2"
+        },
+        {
+            "id": 749,
+            "name": "Oberliga - Bremen"
+        },
+        {
+            "id": 370,
+            "name": "Primera Division"
+        },
+        {
+            "id": 931,
+            "name": "Non League Premier - Southern Central"
+        },
+        {
+            "id": 705,
+            "name": "Campionato Primavera - 1"
+        },
+        {
+            "id": 699,
+            "name": "Women's Championship"
+        },
+        {
+            "id": 44,
+            "name": "FA WSL"
+        },
+        {
+            "id": 746,
+            "name": "Oberliga - Mittelrhein"
+        },
+        {
+            "id": 67,
+            "name": "National 2 - Group A"
+        },
+        {
+            "id": 68,
+            "name": "National 2 - Group B"
+        },
+        {
+            "id": 69,
+            "name": "National 2 - Group C"
+        },
+        {
+            "id": 58,
+            "name": "Non League Premier - Isthmian"
+        },
+        {
+            "id": 59,
+            "name": "Non League Premier - Northern"
+        },
+        {
+            "id": 60,
+            "name": "Non League Premier - Southern South"
+        },
+        {
+            "id": 356,
+            "name": "Second League"
+        },
+        {
+            "id": 204,
+            "name": "1. Lig"
+        },
+        {
+            "id": 1034,
+            "name": "2. Frauen Bundesliga"
+        },
+        {
+            "id": 457,
+            "name": "Campeonato de Portugal Prio - Group A"
+        },
+        {
+            "id": 458,
+            "name": "Campeonato de Portugal Prio - Group B"
+        },
+        {
+            "id": 459,
+            "name": "Campeonato de Portugal Prio - Group C"
+        },
+        {
+            "id": 460,
+            "name": "Campeonato de Portugal Prio - Group D"
+        },
+        {
+            "id": 290,
+            "name": "Persian Gulf Pro League"
+        },
+        {
+            "id": 317,
+            "name": "1st League - RS"
+        },
+        {
+            "id": 1023,
+            "name": "NB III - Southeast"
+        },
+        {
+            "id": 436,
+            "name": "Primera Divisi\u00f3n RFEF - Group 2"
+        },
+        {
+            "id": 435,
+            "name": "Primera Divisi\u00f3n RFEF - Group 1"
+        },
+        {
+            "id": 875,
+            "name": "Segunda Divisi\u00f3n RFEF - Group 1"
+        },
+        {
+            "id": 879,
+            "name": "Segunda Divisi\u00f3n RFEF - Group 5"
+        },
+        {
+            "id": 878,
+            "name": "Segunda Divisi\u00f3n RFEF - Group 4"
+        },
+        {
+            "id": 877,
+            "name": "Segunda Divisi\u00f3n RFEF - Group 3"
+        },
+        {
+            "id": 876,
+            "name": "Segunda Divisi\u00f3n RFEF - Group 2"
+        },
+        {
+            "id": 387,
+            "name": "League"
+        },
+        {
+            "id": 1029,
+            "name": "National 3 - Group G"
+        },
+        {
+            "id": 488,
+            "name": "U19 Bundesliga"
+        },
+        {
+            "id": 461,
+            "name": "National 3 - Group A"
+        },
+        {
+            "id": 462,
+            "name": "National 3 - Group B"
+        },
+        {
+            "id": 463,
+            "name": "National 3 - Group C"
+        },
+        {
+            "id": 466,
+            "name": "National 3 - Group F"
+        },
+        {
+            "id": 468,
+            "name": "National 3 - Group I"
+        },
+        {
+            "id": 467,
+            "name": "National 3 - Group H"
+        },
+        {
+            "id": 464,
+            "name": "National 3 - Group D"
+        },
+        {
+            "id": 465,
+            "name": "National 3 - Group E"
+        },
+        {
+            "id": 469,
+            "name": "National 3 - Group J"
+        },
+        {
+            "id": 319,
+            "name": "2. Division"
+        },
+        {
+            "id": 274,
+            "name": "Liga 1"
+        },
+        {
+            "id": 270,
+            "name": "Primera Divisi\u00f3n - Clausura"
+        },
+        {
+            "id": 441,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 3"
+        },
+        {
+            "id": 442,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 4"
+        },
+        {
+            "id": 443,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 5"
+        },
+        {
+            "id": 446,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 8"
+        },
+        {
+            "id": 449,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 11"
+        },
+        {
+            "id": 455,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 17"
+        },
+        {
+            "id": 371,
+            "name": "First League"
+        },
+        {
+            "id": 706,
+            "name": "Campionato Primavera - 2"
+        },
+        {
+            "id": 570,
+            "name": "Premier League"
+        },
+        {
+            "id": 336,
+            "name": "Druha Liga"
+        },
+        {
+            "id": 405,
+            "name": "National Soccer League"
+        },
+        {
+            "id": 406,
+            "name": "Professional League"
+        },
+        {
+            "id": 303,
+            "name": "Division 1"
+        },
+        {
+            "id": 440,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 2"
+        },
+        {
+            "id": 205,
+            "name": "2. Lig"
+        },
+        {
+            "id": 633,
+            "name": "NB III - Northeast"
+        },
+        {
+            "id": 635,
+            "name": "NB III - Northwest"
+        },
+        {
+            "id": 634,
+            "name": "NB III - Southwest"
+        },
+        {
+            "id": 334,
+            "name": "Persha Liga"
+        },
+        {
+            "id": 664,
+            "name": "Superliga"
+        },
+        {
+            "id": 310,
+            "name": "Superliga"
+        },
+        {
+            "id": 311,
+            "name": "1st Division"
+        },
+        {
+            "id": 312,
+            "name": "1a Divisi\u00f3"
+        },
+        {
+            "id": 702,
+            "name": "Premier League 2 Division One"
+        },
+        {
+            "id": 552,
+            "name": "3. Lig - Group 1"
+        },
+        {
+            "id": 1027,
+            "name": "3. Lig - Group 4"
+        },
+        {
+            "id": 553,
+            "name": "3. Lig - Group 2"
+        },
+        {
+            "id": 554,
+            "name": "3. Lig - Group 3"
+        },
+        {
+            "id": 188,
+            "name": "A-League"
+        },
+        {
+            "id": 439,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 1"
+        },
+        {
+            "id": 450,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 12"
+        },
+        {
+            "id": 452,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 14"
+        },
+        {
+            "id": 453,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 15"
+        },
+        {
+            "id": 187,
+            "name": "Ligue 2"
+        },
+        {
+            "id": 703,
+            "name": "Professional Development League"
+        },
+        {
+            "id": 518,
+            "name": "Reserve Pro League"
+        },
+        {
+            "id": 372,
+            "name": "Second League"
+        },
+        {
+            "id": 392,
+            "name": "Challenge League"
+        },
+        {
+            "id": 456,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 18"
+        },
+        {
+            "id": 451,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 13"
+        },
+        {
+            "id": 454,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 16"
+        },
+        {
+            "id": 567,
+            "name": "Ligi kuu Bara"
+        },
+        {
+            "id": 445,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 7"
+        },
+        {
+            "id": 758,
+            "name": "Premier Division"
+        },
+        {
+            "id": 448,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 10"
+        },
+        {
+            "id": 200,
+            "name": "Botola Pro"
+        },
+        {
+            "id": 566,
+            "name": "Ligue A"
+        },
+        {
+            "id": 202,
+            "name": "Ligue 1"
+        },
+        {
+            "id": 380,
+            "name": "Premier League"
+        },
+        {
+            "id": 92,
+            "name": "Derde Divisie - Saturday"
+        },
+        {
+            "id": 386,
+            "name": "Ligue 1"
+        },
+        {
+            "id": 289,
+            "name": "1st Division"
+        },
+        {
+            "id": 93,
+            "name": "Derde Divisie - Sunday"
+        },
+        {
+            "id": 427,
+            "name": "Serie D - Girone B"
+        },
+        {
+            "id": 426,
+            "name": "Serie D - Girone A"
+        },
+        {
+            "id": 428,
+            "name": "Serie D - Girone C"
+        },
+        {
+            "id": 432,
+            "name": "Serie D - Girone G"
+        },
+        {
+            "id": 429,
+            "name": "Serie D - Girone D"
+        },
+        {
+            "id": 430,
+            "name": "Serie D - Girone E"
+        },
+        {
+            "id": 431,
+            "name": "Serie D - Girone F"
+        },
+        {
+            "id": 433,
+            "name": "Serie D - Girone H"
+        },
+        {
+            "id": 434,
+            "name": "Serie D - Girone I"
+        },
+        {
+            "id": 142,
+            "name": "Primera Divisi\u00f3n Femenina"
+        },
+        {
+            "id": 585,
+            "name": "Premier League"
+        },
+        {
+            "id": 625,
+            "name": "Carioca - 2"
+        },
+        {
+            "id": 444,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 6"
+        },
+        {
+            "id": 647,
+            "name": "Lao League"
+        },
+        {
+            "id": 404,
+            "name": "Campionato"
+        },
+        {
+            "id": 418,
+            "name": "Birinci Dasta"
+        },
+        {
+            "id": 291,
+            "name": "Azadegan League"
+        },
+        {
+            "id": 363,
+            "name": "Premier League"
+        },
+        {
+            "id": 323,
+            "name": "Indian Super League"
+        },
+        {
+            "id": 734,
+            "name": "Diski Challenge"
+        },
+        {
+            "id": 306,
+            "name": "Second Division"
+        },
+        {
+            "id": 397,
+            "name": "Girabola"
+        },
+        {
+            "id": 872,
+            "name": "Liga Premier Serie B"
+        },
+        {
+            "id": 390,
+            "name": "Premier League"
+        },
+        {
+            "id": 447,
+            "name": "Tercera Divisi\u00f3n RFEF - Group 9"
+        },
+        {
+            "id": 425,
+            "name": "Premier League"
+        },
+        {
+            "id": 275,
+            "name": "Liga 2"
+        },
+        {
+            "id": 288,
+            "name": "Premier Soccer League"
+        },
+        {
+            "id": 276,
+            "name": "FKF Premier League"
+        },
+        {
+            "id": 417,
+            "name": "Premier League"
+        },
+        {
+            "id": 494,
+            "name": "Super League 2"
+        },
+        {
+            "id": 322,
+            "name": "Premier League"
+        },
+        {
+            "id": 190,
+            "name": "A-League Women"
+        },
+        {
+            "id": 201,
+            "name": "Botola 2"
+        },
+        {
+            "id": 515,
+            "name": "U21 League 1"
+        },
+        {
+            "id": 542,
+            "name": "Iraqi League"
+        },
+        {
+            "id": 962,
+            "name": "Premier League"
+        },
+        {
+            "id": 403,
+            "name": "Ligue 1"
+        },
+        {
+            "id": 828,
+            "name": "Ligue 2"
+        },
+        {
+            "id": 887,
+            "name": "Second League"
+        },
+        {
+            "id": 423,
+            "name": "Ligue 1"
+        },
+        {
+            "id": 760,
+            "name": "LFA First Division"
+        },
+        {
+            "id": 233,
+            "name": "Premier League"
+        },
+        {
+            "id": 411,
+            "name": "Elite One"
+        },
+        {
+            "id": 609,
+            "name": "Cearense - 1"
+        },
+        {
+            "id": 489,
+            "name": "USL League One"
+        },
+        {
+            "id": 591,
+            "name": "Pro League"
+        },
+        {
+            "id": 621,
+            "name": "Piauiense"
+        },
+        {
+            "id": 606,
+            "name": "Paranaense - 1"
+        },
+        {
+            "id": 194,
+            "name": "South Australia NPL"
+        },
+        {
+            "id": 624,
+            "name": "Carioca - 1"
+        },
+        {
+            "id": 628,
+            "name": "Goiano - 1"
+        },
+        {
+            "id": 195,
+            "name": "Victoria NPL"
+        },
+        {
+            "id": 608,
+            "name": "Maranhense"
+        },
+        {
+            "id": 477,
+            "name": "Ga\u00facho - 1"
+        },
+        {
+            "id": 4,
+            "name": "Euro Championship"
+        },
+        {
+            "id": 604,
+            "name": "Catarinense - 1"
+        },
+        {
+            "id": 626,
+            "name": "Sergipano"
+        },
+        {
+            "id": 476,
+            "name": "Paulista - A2"
+        },
+        {
+            "id": 611,
+            "name": "Capixaba"
+        },
+        {
+            "id": 252,
+            "name": "Division Profesional - Clausura"
+        },
+        {
+            "id": 250,
+            "name": "Division Profesional - Apertura"
+        },
+        {
+            "id": 603,
+            "name": "Paraibano"
+        },
+        {
+            "id": 620,
+            "name": "Cearense - 2"
+        },
+        {
+            "id": 9,
+            "name": "Copa America"
+        },
+        {
+            "id": 77,
+            "name": "Alagoano"
+        },
+        {
+            "id": 475,
+            "name": "Paulista - A1"
+        },
+        {
+            "id": 616,
+            "name": "Potiguar"
+        },
+        {
+            "id": 522,
+            "name": "Amazonense"
+        },
+        {
+            "id": 631,
+            "name": "Tocantinense"
+        },
+        {
+            "id": 623,
+            "name": "Sul-Matogrossense"
+        },
+        {
+            "id": 622,
+            "name": "Pernambucano - 1"
+        },
+        {
+            "id": 629,
+            "name": "Mineiro - 1"
+        },
+        {
+            "id": 605,
+            "name": "Paulista - A3"
+        },
+        {
+            "id": 481,
+            "name": "Northern NSW NPL"
+        },
+        {
+            "id": 521,
+            "name": "Amapaense"
+        },
+        {
+            "id": 192,
+            "name": "New South Wales NPL"
+        },
+        {
+            "id": 13,
+            "name": "CONMEBOL Libertadores"
+        },
+        {
+            "id": 358,
+            "name": "First Division"
+        },
+        {
+            "id": 255,
+            "name": "USL Championship"
+        },
+        {
+            "id": 11,
+            "name": "CONMEBOL Sudamericana"
+        },
+        {
+            "id": 398,
+            "name": "Premier League"
+        },
+        {
+            "id": 253,
+            "name": "Major League Soccer"
+        },
+        {
+            "id": 615,
+            "name": "Rondoniense"
+        },
+        {
+            "id": 725,
+            "name": "Toppserien"
+        },
+        {
+            "id": 104,
+            "name": "1. Division"
+        },
+        {
+            "id": 164,
+            "name": "\u00darvalsdeild"
+        },
+        {
+            "id": 671,
+            "name": "\u00darvalsdeild Women"
+        },
+        {
+            "id": 915,
+            "name": "1. Division Women"
+        },
+        {
+            "id": 736,
+            "name": "Elitettan"
+        },
+        {
+            "id": 165,
+            "name": "1. Deild"
+        },
+        {
+            "id": 166,
+            "name": "2. Deild"
+        },
+        {
+            "id": 239,
+            "name": "Primera A"
+        },
+        {
+            "id": 240,
+            "name": "Primera B"
+        },
+        {
+            "id": 98,
+            "name": "J1 League"
+        },
+        {
+            "id": 99,
+            "name": "J2 League"
+        },
+        {
+            "id": 100,
+            "name": "J3 League"
+        },
+        {
+            "id": 189,
+            "name": "Capital Territory NPL"
+        },
+        {
+            "id": 779,
+            "name": "3. Division - Girone 6"
+        },
+        {
+            "id": 778,
+            "name": "3. Division - Girone 5"
+        },
+        {
+            "id": 777,
+            "name": "3. Division - Girone 4"
+        },
+        {
+            "id": 776,
+            "name": "3. Division - Girone 3"
+        },
+        {
+            "id": 775,
+            "name": "3. Division - Girone 2"
+        },
+        {
+            "id": 774,
+            "name": "3. Division - Girone 1"
+        },
+        {
+            "id": 627,
+            "name": "Paraense"
+        },
+        {
+            "id": 129,
+            "name": "Primera Nacional"
+        },
+        {
+            "id": 131,
+            "name": "Primera B Metropolitana"
+        },
+        {
+            "id": 132,
+            "name": "Primera C"
+        },
+        {
+            "id": 520,
+            "name": "Acreano"
+        },
+        {
+            "id": 281,
+            "name": "Primera Divisi\u00f3n"
+        },
+        {
+            "id": 299,
+            "name": "Primera Divisi\u00f3n"
+        },
+        {
+            "id": 1032,
+            "name": "Copa de la Liga Profesional"
+        },
+        {
+            "id": 128,
+            "name": "Liga Profesional Argentina"
+        },
+        {
+            "id": 304,
+            "name": "Liga Paname\u00f1a de F\u00fatbol"
+        },
+        {
+            "id": 265,
+            "name": "Primera Divisi\u00f3n"
+        },
+        {
+            "id": 482,
+            "name": "Queensland NPL"
+        },
+        {
+            "id": 648,
+            "name": "Tasmania NPL"
+        },
+        {
+            "id": 479,
+            "name": "Canadian Premier League"
+        },
+        {
+            "id": 344,
+            "name": "Primera Divisi\u00f3n"
+        },
+        {
+            "id": 293,
+            "name": "K League 2"
+        },
+        {
+            "id": 292,
+            "name": "K League 1"
+        },
+        {
+            "id": 327,
+            "name": "Erovnuli Liga"
+        },
+        {
+            "id": 329,
+            "name": "Meistriliiga"
+        },
+        {
+            "id": 328,
+            "name": "Esiliiga A"
+        },
+        {
+            "id": 101,
+            "name": "J-League Cup"
+        },
+        {
+            "id": 326,
+            "name": "Erovnuli Liga 2"
+        },
+        {
+            "id": 114,
+            "name": "Superettan"
+        },
+        {
+            "id": 113,
+            "name": "Allsvenskan"
+        },
+        {
+            "id": 103,
+            "name": "Eliteserien"
+        },
+        {
+            "id": 244,
+            "name": "Veikkausliiga"
+        },
+        {
+            "id": 549,
+            "name": "Damallsvenskan"
+        },
+        {
+            "id": 597,
+            "name": "Division 2 - \u00d6stra G\u00f6taland"
+        },
+        {
+            "id": 593,
+            "name": "Division 2 - Norra Svealand"
+        },
+        {
+            "id": 596,
+            "name": "Division 2 - V\u00e4stra G\u00f6taland"
+        },
+        {
+            "id": 594,
+            "name": "Division 2 - Norrland"
+        },
+        {
+            "id": 592,
+            "name": "Division 2 - Norra G\u00f6taland"
+        },
+        {
+            "id": 595,
+            "name": "Division 2 - S\u00f6dra Svealand"
+        },
+        {
+            "id": 357,
+            "name": "Premier Division"
+        },
+        {
+            "id": 242,
+            "name": "Liga Pro"
+        },
+        {
+            "id": 367,
+            "name": "Meistaradeildin"
+        },
+        {
+            "id": 640,
+            "name": "Kansallinen Liiga"
+        },
+        {
+            "id": 254,
+            "name": "NWSL Women"
+        },
+        {
+            "id": 266,
+            "name": "Primera B"
+        },
+        {
+            "id": 245,
+            "name": "Ykk\u00f6nen"
+        },
+        {
+            "id": 376,
+            "name": "National Football League"
+        },
+        {
+            "id": 238,
+            "name": "Youth Championship"
+        },
+        {
+            "id": 759,
+            "name": "Liga Mayor"
+        },
+        {
+            "id": 268,
+            "name": "Primera Divisi\u00f3n - Apertura"
+        },
+        {
+            "id": 711,
+            "name": "Segunda Divisi\u00f3n"
+        },
+        {
+            "id": 5,
+            "name": "UEFA Nations League"
+        },
+        {
+            "id": 169,
+            "name": "Super League"
+        },
+        {
+            "id": 366,
+            "name": "1. Deild"
+        },
+        {
+            "id": 909,
+            "name": "MLS Next Pro"
+        },
+        {
+            "id": 401,
+            "name": "Premier Soccer League"
+        },
+        {
+            "id": 249,
+            "name": "Kakkonen - Lohko C"
+        },
+        {
+            "id": 247,
+            "name": "Kakkonen - Lohko A"
+        },
+        {
+            "id": 248,
+            "name": "Kakkonen - Lohko B"
+        },
+        {
+            "id": 389,
+            "name": "Premier League"
+        },
+        {
+            "id": 256,
+            "name": "USL League Two"
+        },
+        {
+            "id": 251,
+            "name": "Division Intermedia"
+        },
+        {
+            "id": 660,
+            "name": "WK-League"
+        },
+        {
+            "id": 369,
+            "name": "Super League"
+        },
+        {
+            "id": 361,
+            "name": "1 Lyga"
+        },
+        {
+            "id": 365,
+            "name": "Virsliga"
+        },
+        {
+            "id": 116,
+            "name": "Premier League"
+        },
+        {
+            "id": 74,
+            "name": "Brasileiro Women"
+        },
+        {
+            "id": 607,
+            "name": "Roraimense"
+        },
+        {
+            "id": 362,
+            "name": "A Lyga"
+        },
+        {
+            "id": 295,
+            "name": "K3 League"
+        },
+        {
+            "id": 196,
+            "name": "Western Australia NPL"
+        },
+        {
+            "id": 71,
+            "name": "Serie A"
+        },
+        {
+            "id": 170,
+            "name": "League One"
+        },
+        {
+            "id": 243,
+            "name": "Liga Pro Serie B"
+        },
+        {
+            "id": 649,
+            "name": "Supreme Division Women"
+        },
+        {
+            "id": 523,
+            "name": "NISA"
+        },
+        {
+            "id": 269,
+            "name": "Segunda Divisi\u00f3n"
+        },
+        {
+            "id": 619,
+            "name": "Mineiro - 2"
+        },
+        {
+            "id": 936,
+            "name": "Catarinense - 2"
+        },
+        {
+            "id": 571,
+            "name": "Vysshaya Liga"
+        },
+        {
+            "id": 72,
+            "name": "Serie B"
+        },
+        {
+            "id": 75,
+            "name": "Serie C"
+        },
+        {
+            "id": 134,
+            "name": "Torneo Federal A"
+        },
+        {
+            "id": 300,
+            "name": "Segunda Divisi\u00f3n"
+        },
+        {
+            "id": 364,
+            "name": "1. Liga"
+        },
+        {
+            "id": 117,
+            "name": "1. Division"
+        },
+        {
+            "id": 76,
+            "name": "Serie D"
+        },
+        {
+            "id": 929,
+            "name": "League Two"
+        },
+        {
+            "id": 478,
+            "name": "Ga\u00facho - 2"
+        },
+        {
+            "id": 1030,
+            "name": "Goiano - 2"
+        },
+        {
+            "id": 614,
+            "name": "Paranaense - 2"
+        },
+        {
+            "id": 282,
+            "name": "Segunda Divisi\u00f3n"
+        },
+        {
+            "id": 480,
+            "name": "Olympics Men"
+        },
+        {
+            "id": 524,
+            "name": "Olympics Women"
+        },
+        {
+            "id": 653,
+            "name": "Second League - Group 4"
+        },
+        {
+            "id": 569,
+            "name": "Premier League"
+        },
+        {
+            "id": 589,
+            "name": "Taiwan Football Premier League"
+        },
+        {
+            "id": 563,
+            "name": "Ettan - Norra"
+        },
+        {
+            "id": 564,
+            "name": "Ettan - S\u00f6dra"
+        },
+        {
+            "id": 473,
+            "name": "2. Division - Group 1"
+        },
+        {
+            "id": 474,
+            "name": "2. Division - Group 2"
+        },
+        {
+            "id": 388,
+            "name": "1. Division"
+        },
+        {
+            "id": 391,
+            "name": "Super League"
+        },
+        {
+            "id": 278,
+            "name": "Super League"
+        },
+        {
+            "id": 1087,
+            "name": "Ykk\u00f6sliiga"
+        },
+        {
+            "id": 1090,
+            "name": "NNSW League 1"
+        },
+        {
+            "id": 1094,
+            "name": "Western Australia State League 1"
+        },
+        {
+            "id": 368,
+            "name": "Premier League"
+        },
+        {
+            "id": 613,
+            "name": "Baiano - 2"
+        },
+        {
+            "id": 258,
+            "name": "Canadian Soccer League"
+        },
+        {
+            "id": 210,
+            "name": "HNL"
+        },
+        {
+            "id": 339,
+            "name": "Liga Nacional"
+        },
+        {
+            "id": 106,
+            "name": "Ekstraklasa"
+        },
+        {
+            "id": 400,
+            "name": "Super League"
+        },
+        {
+            "id": 119,
+            "name": "Superliga"
+        },
+        {
+            "id": 262,
+            "name": "Liga MX"
+        },
+        {
+            "id": 287,
+            "name": "Prva Liga"
+        },
+        {
+            "id": 145,
+            "name": "Challenger Pro League"
+        },
+        {
+            "id": 146,
+            "name": "Super League Women"
+        },
+        {
+            "id": 107,
+            "name": "I Liga"
+        },
+        {
+            "id": 173,
+            "name": "Second League"
+        },
+        {
+            "id": 39,
+            "name": "Premier League"
+        },
+        {
+            "id": 2,
+            "name": "UEFA Champions League"
+        },
+        {
+            "id": 848,
+            "name": "UEFA Europa Conference League"
+        },
+        {
+            "id": 3,
+            "name": "UEFA Europa League"
+        },
+        {
+            "id": 140,
+            "name": "La Liga"
+        },
+        {
+            "id": 120,
+            "name": "1. Division"
+        },
+        {
+            "id": 208,
+            "name": "Challenge League"
+        },
+        {
+            "id": 332,
+            "name": "Super Liga"
+        },
+        {
+            "id": 89,
+            "name": "Eerste Divisie"
+        },
+        {
+            "id": 345,
+            "name": "Czech Liga"
+        },
+        {
+            "id": 162,
+            "name": "Primera Divisi\u00f3n"
+        },
+        {
+            "id": 111,
+            "name": "FAW Championship"
+        },
+        {
+            "id": 271,
+            "name": "NB I"
+        },
+        {
+            "id": 109,
+            "name": "II Liga - East"
+        },
+        {
+            "id": 588,
+            "name": "National League"
+        },
+        {
+            "id": 346,
+            "name": "FNL"
+        },
+        {
+            "id": 110,
+            "name": "Premier League"
+        },
+        {
+            "id": 62,
+            "name": "Ligue 2"
+        },
+        {
+            "id": 235,
+            "name": "Premier League"
+        },
+        {
+            "id": 144,
+            "name": "Jupiler Pro League"
+        },
+        {
+            "id": 88,
+            "name": "Eredivisie"
+        },
+        {
+            "id": 61,
+            "name": "Ligue 1"
+        },
+        {
+            "id": 172,
+            "name": "First League"
+        },
+        {
+            "id": 286,
+            "name": "Super Liga"
+        },
+        {
+            "id": 207,
+            "name": "Super League"
+        },
+        {
+            "id": 394,
+            "name": "Super Liga"
+        },
+        {
+            "id": 383,
+            "name": "Ligat Ha'al"
+        },
+        {
+            "id": 17,
+            "name": "AFC Champions League"
+        },
+        {
+            "id": 862,
+            "name": "3. Division"
+        },
+        {
+            "id": 122,
+            "name": "2nd Division - Group 1"
+        },
+        {
+            "id": 40,
+            "name": "Championship"
+        },
+        {
+            "id": 41,
+            "name": "League One"
+        },
+        {
+            "id": 42,
+            "name": "League Two"
+        },
+        {
+            "id": 141,
+            "name": "Segunda Divisi\u00f3n"
+        },
+        {
+            "id": 218,
+            "name": "Bundesliga"
+        },
+        {
+            "id": 296,
+            "name": "Thai League 1"
+        },
+        {
+            "id": 374,
+            "name": "2. SNL"
+        },
+        {
+            "id": 219,
+            "name": "2. Liga"
+        },
+        {
+            "id": 179,
+            "name": "Premiership"
+        },
+        {
+            "id": 283,
+            "name": "Liga I"
+        },
+        {
+            "id": 373,
+            "name": "1. SNL"
+        },
+        {
+            "id": 355,
+            "name": "First League"
+        },
+        {
+            "id": 333,
+            "name": "Premier League"
+        },
+        {
+            "id": 183,
+            "name": "League One"
+        },
+        {
+            "id": 180,
+            "name": "Championship"
+        },
+        {
+            "id": 184,
+            "name": "League Two"
+        },
+        {
+            "id": 330,
+            "name": "Premier League"
+        },
+        {
+            "id": 407,
+            "name": "Championship"
+        },
+        {
+            "id": 408,
+            "name": "Premiership"
+        },
+        {
+            "id": 211,
+            "name": "First NL"
+        },
+        {
+            "id": 382,
+            "name": "Liga Leumit"
+        },
+        {
+            "id": 308,
+            "name": "Division 1"
+        },
+        {
+            "id": 349,
+            "name": "3. liga - MSFL"
+        },
+        {
+            "id": 348,
+            "name": "3. liga - CFL A"
+        },
+        {
+            "id": 685,
+            "name": "3. liga - CFL B"
+        },
+        {
+            "id": 638,
+            "name": "Kvindeliga"
+        },
+        {
+            "id": 135,
+            "name": "Serie A"
+        },
+        {
+            "id": 78,
+            "name": "Bundesliga"
+        },
+        {
+            "id": 318,
+            "name": "1. Division"
+        },
+        {
+            "id": 668,
+            "name": "1. Liga U19"
+        },
+        {
+            "id": 730,
+            "name": "Football League - Highland League"
+        },
+        {
+            "id": 236,
+            "name": "First League"
+        },
+        {
+            "id": 79,
+            "name": "2. Bundesliga"
+        },
+        {
+            "id": 315,
+            "name": "Premijer Liga"
+        },
+        {
+            "id": 393,
+            "name": "Premier League"
+        },
+        {
+            "id": 487,
+            "name": "First Amateur Division"
+        },
+        {
+            "id": 223,
+            "name": "Regionalliga - West"
+        },
+        {
+            "id": 222,
+            "name": "Regionalliga - Mitte"
+        },
+        {
+            "id": 221,
+            "name": "Regionalliga - Ost"
+        },
+        {
+            "id": 946,
+            "name": "Second NL"
+        },
+        {
+            "id": 510,
+            "name": "1. Liga Promotion"
+        },
+        {
+            "id": 1126,
+            "name": "Esiliiga B"
+        },
+        {
+            "id": 261,
+            "name": "National Division"
+        },
+        {
+            "id": 305,
+            "name": "Stars League"
+        },
+        {
+            "id": 95,
+            "name": "Segunda Liga"
+        },
+        {
+            "id": 94,
+            "name": "Primeira Liga"
+        },
+        {
+            "id": 301,
+            "name": "Pro League"
+        },
+        {
+            "id": 739,
+            "name": "AXA Women\u2019s Super League"
+        },
+        {
+            "id": 272,
+            "name": "NB II"
+        },
+        {
+            "id": 731,
+            "name": "Football League - Lowland League"
+        },
+        {
+            "id": 149,
+            "name": "Second Amateur Division - VFV A"
+        },
+        {
+            "id": 136,
+            "name": "Serie B"
+        },
+        {
+            "id": 599,
+            "name": "1. Liga Classic - Group 1"
+        },
+        {
+            "id": 600,
+            "name": "1. Liga Classic - Group 2"
+        },
+        {
+            "id": 601,
+            "name": "1. Liga Classic - Group 3"
+        },
+        {
+            "id": 80,
+            "name": "3. Liga"
+        },
+        {
+            "id": 163,
+            "name": "Liga de Ascenso"
+        },
+        {
+            "id": 43,
+            "name": "National League"
+        },
+        {
+            "id": 203,
+            "name": "S\u00fcper Lig"
+        },
+        {
+            "id": 51,
+            "name": "National League - South"
+        },
+        {
+            "id": 50,
+            "name": "National League - North"
+        },
+        {
+            "id": 342,
+            "name": "Premier League"
+        },
+        {
+            "id": 865,
+            "name": "Liga 3"
+        },
+        {
+            "id": 343,
+            "name": "First League"
+        },
+        {
+            "id": 701,
+            "name": "Liga Revela\u00e7\u00e3o U23"
+        },
+        {
+            "id": 492,
+            "name": "Tweede Divisie"
+        },
+        {
+            "id": 186,
+            "name": "Ligue 1"
+        },
+        {
+            "id": 854,
+            "name": "WE League"
+        }
+    ]
+}
