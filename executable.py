@@ -425,10 +425,13 @@ class SetupWindow(QMainWindow):
         search_text = search_text.lower()
         
         for league_id, checkbox in self.league_checkboxes.items():
-            league_name = AVAILABLE_LEAGUES[league_id].lower()
-            # Show checkbox if search text is in league name or ID
+            league_info = AVAILABLE_LEAGUES[league_id]
+            league_name = league_info['name'].lower()
+            country_name = league_info['country'].lower()
+            # Show checkbox if search text is in league name, country, or ID
             checkbox.setVisible(
                 search_text in league_name or 
+                search_text in country_name or
                 search_text in league_id
             )
 
@@ -440,23 +443,23 @@ class SetupWindow(QMainWindow):
     def fetch_leagues(self):
         """Fetch and display available leagues"""
         try:
-            # Create temp dir
             temp_dir = Path("temp")
             temp_dir.mkdir(exist_ok=True)
             
             try:
-                # Get league status in temp dir only
                 from scripts.league_status_checker import get_league_status
                 get_league_status(temp_dir=temp_dir)
                 
-                # Parse the leagues from temp file
                 with open(temp_dir / "league_status.json", 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     
                     leagues_data = {
                         "leagues": [
-                            {"id": league['league']['id'], 
-                             "name": league['league']['name']}
+                            {
+                                "id": league['league']['id'], 
+                                "name": league['league']['name'],
+                                "country": league['country']['name']
+                            }
                             for league in data['response']
                             if any(s['year'] == 2024 and 
                                   s['coverage']['fixtures']['events'] and
@@ -465,12 +468,16 @@ class SetupWindow(QMainWindow):
                         ]
                     }
                     
-                    # Update available leagues in memory
+                    # Update available leagues with country info
                     global AVAILABLE_LEAGUES
-                    AVAILABLE_LEAGUES = {str(league['id']): league['name'] 
-                                       for league in leagues_data['leagues']}
+                    AVAILABLE_LEAGUES = {
+                        str(league['id']): {
+                            'name': league['name'],
+                            'country': league['country']
+                        }
+                        for league in leagues_data['leagues']
+                    }
                     
-                    # Populate checkboxes
                     self.populate_leagues(leagues_data)
                     self.league_frame.show()
                     
@@ -492,13 +499,13 @@ class SetupWindow(QMainWindow):
             checkbox.deleteLater()
         self.league_checkboxes.clear()
         
-        # Sort leagues by name
-        leagues = sorted(data['leagues'], key=lambda x: x['name'])
+        # Sort leagues by country, then name
+        leagues = sorted(data['leagues'], key=lambda x: (x['country'], x['name']))
         
-        # Create checkboxes
+        # Create checkboxes with country info
         for league in leagues:
             league_id = str(league['id'])
-            checkbox = QCheckBox(f"{league['name']} ({league_id})")
+            checkbox = QCheckBox(f"{league['country']} - {league['name']} ({league_id})")
             self.league_checkboxes[league_id] = checkbox
             self.league_layout.addWidget(checkbox)
         

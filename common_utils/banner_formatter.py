@@ -1,6 +1,17 @@
 import requests
 from PIL import Image
 import io
+import os
+import sys
+
+def get_asset_path():
+    """Get the correct path whether running as script or compiled"""
+    if getattr(sys, 'frozen', False):
+        # Running in PyInstaller bundle
+        return os.path.join(sys._MEIPASS, 'assets', 'images')
+    else:
+        # Running in normal Python environment
+        return os.path.join(os.path.dirname(os.path.dirname(__file__)), 'assets', 'images')
 
 def combine_images(home_logo, vs_image, away_logo, output_path, spacing=20):
     """
@@ -16,13 +27,16 @@ def combine_images(home_logo, vs_image, away_logo, output_path, spacing=20):
     Returns:
     - None. Saves the combined image to the specified output path.
     """
+    # Get the vs.png path
+    vs_image_path = os.path.join(get_asset_path(), 'vs.png')
+    
     # Open images
     # image1 = Image.open(home_logo)
 
     response1 = requests.get(home_logo)
     image1 = Image.open(io.BytesIO(response1.content))
 
-    image2 = Image.open(vs_image)
+    image2 = Image.open(vs_image_path)
 
     # image3 = Image.open(away_logo)
 
