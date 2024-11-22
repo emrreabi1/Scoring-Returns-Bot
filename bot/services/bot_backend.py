@@ -84,7 +84,6 @@ async def get_fixtures_statistics(fixture_id):
         # Reformat the datetime object to the desired format
         nice_date_format = date_obj.strftime("%B %d, %Y, %H:%M")
              
-        days, hours, minutes, seconds = calculate_time_remaining(date)
         league_image = specific_fixture["response"][0]["league"]["logo"]
 
         # Create an instance of the Embed class
@@ -161,7 +160,7 @@ async def get_fixtures_statistics(fixture_id):
 
     # Loop through the response to extract events goals related
 
-    '''HÁ JOGOS EM QUE NÃO HÁ EVENTOS TER EM ATENÇÃO'''
+    '''There are games that do not have events!!'''
 
     if not specific_fixture["response"][0]["events"]:  # if list is empty. No events
         first_scorer = "none"
@@ -221,6 +220,7 @@ async def information_presenter(live_stats_dict, bot, previous_size, specific_fi
     - task_manager (TaskManager): Task management instance
     - author_id (int): Discord user ID who initiated
     - announcment_id (int): Channel ID for announcements
+    - logger (logging.Logger): Logger instance
     
     Returns:
     - tuple: (discord.Embed, int) Contains updated embed and new event count
@@ -403,7 +403,6 @@ async def information_presenter(live_stats_dict, bot, previous_size, specific_fi
     embed1.set_thumbnail(url=league_image)
     embed1.set_footer(text=footer_text, icon_url=footer_icon_url)  # •
      
-    embed1.set_footer(text=footer_text, icon_url=footer_icon_url)  # •
     file = discord.File(
         f"{BANNERS_PATH}/{home_team}vs{away_team}.png",
         filename="image.png",
@@ -423,6 +422,7 @@ async def game_status_func(bot, specific_fixture, live_stats_dict, announcment_i
     - live_stats_dict (dict): Current match statistics
     - announcment_id (int): Channel ID for announcements
     - game_moment (str): Current game state (e.g. "Game Started", "Halftime")
+    - logger (logging.Logger): Logger instance
     """
 
     # Game Status Section
@@ -550,16 +550,11 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
     home_team = data_dict["Home Team"]
     away_team = data_dict["Away Team"]
     
-
-    ball_possession_dict = {}
     all_stats_dict = {}
    
     task = asyncio.current_task()
-    all_buttons = CombinedView(task, author_id, 
-                    f"{LIVE_JSON_PATH}/{home_team}vs{away_team}.json", 
-                    task_manager,
-                    all_stats_dict)
-    
+    all_buttons = CombinedView(task, author_id, task_manager, all_stats_dict)
+        
     all_buttons.update_stats(specific_fixture)
 
     logger.info("Game monitoring started message sent.")
@@ -712,9 +707,6 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
             live_stats_dict[1], bot, previous_size, specific_fixture, task_manager, author_id, announcment_id, logger
         )
         
-        #Ported Function to it's own function
-        #minutes_15_analysis(live_stats_dict[1], ball_possession_dict, last_15_ball_possession, all_buttons, all_stats_dict, specific_fixture)
-        
         # Game Halftime Halt
         if live_stats_dict[1].get("Game Status") in ("HT", "BT"):
             
@@ -760,14 +752,14 @@ async def only_stats_main(bot, initial_message, fixture_id, author_id, task_mana
             )
 
             # Shorten the sleep duration and re-check the game status more frequently
-            halftime_wait_time = 1800  # Total wait time for halftime
-            check_interval = 45  # Interval to re-check the game status
+            halftime_wait_time = 1800  # 30 minutes total maximum wait
             elapsed_time = 0
-            
+
             while elapsed_time < halftime_wait_time:
-                await asyncio.sleep(check_interval)
-                elapsed_time += check_interval
-                # Re-fetch the game status to see if it has changed
+                await asyncio.sleep(LOOP_WAIT_TIME)   # Use configurable wait time
+                elapsed_time += LOOP_WAIT_TIME
+                
+                # Re-fetch the game status
                 live_stats_dict = await get_fixtures_statistics(fixture_id)
                 specific_fixture = live_stats_dict[4]
                 all_buttons.update_stats(specific_fixture)

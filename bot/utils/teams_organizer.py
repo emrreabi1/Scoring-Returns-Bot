@@ -18,6 +18,8 @@ class TeamsOrganizer:
         self.teams_fixtures_dict = {}
         self.fixtures_by_league  = {}  # New structure to hold fixtures by league
         self.logger = configure_logging("teams_organizer", "system")
+        
+        self.load_fixtures()  # Load first since new_load_teams depends on it
         self.new_load_teams()
         
 
@@ -62,9 +64,6 @@ class TeamsOrganizer:
         """
         standings_path = STANDINGS_PATH
         
-        
-        self.load_fixtures()  # Load all fixtures first
-
         
         with open(
             FIXTURES_BY_LEAGUE_PATH,
@@ -174,7 +173,7 @@ class TeamsOrganizer:
         - tuple: (fixture_id, date) for the next game
         - None: if no fixtures found or team not found
         
-        Note: Uses UTC-4 timezone and includes 1-day delay buffer
+        Note: Uses UTC-4 timezone and includes 4-hour delay buffer
         """
         """Find the team's next game."""
         '''team_league = [team_id, league_id];; Only need team_id in this new organization format'''
@@ -189,9 +188,9 @@ class TeamsOrganizer:
             self.logger.warning("No fixtures found for this team or Team ID not found in the specified league.")
             return None, None
         
-        '''Add a loop  to iterate the list and grab the future game based on date, add 1 day folga'''
+        '''Add a loop  to iterate the list and grab the future game based on date, add 4 hours delay'''
 
-        # Current date in UTC and additional 1-day delay
+        # Current date in UTC and additional 4-hour delay
         current_date_with_delay = datetime.now(timezone.utc) - timedelta(hours=4)
 
         # Find next game

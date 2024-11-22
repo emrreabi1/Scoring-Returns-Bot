@@ -1,7 +1,7 @@
 class TaskManager:
     def __init__(self):
         # Initialize a dictionary to keep track of user tasks
-        self.user_tasks = {}
+        self.user_tasks = {}  # Dictionary mapping user IDs to tuples (task_count, [games_list])
 
     def new_add_task(self, user_id, game_name):
         """

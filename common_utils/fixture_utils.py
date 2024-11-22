@@ -13,7 +13,8 @@ from configs.config import (
     base_url,
     headers,
     VS_PATH,
-    BANNERS_PATH
+    BANNERS_PATH,
+    footer_text
 )
 
 def get_team_names_from_fixture(fixture_id):
@@ -122,6 +123,6 @@ def get_thread_embed(fixture_id, usage_type=0):
     embed.set_thumbnail(url=league_image)
 
     # Set the footer of the embed
-    embed.set_footer(text="Scoring Returns", icon_url=footer_icon_url)  # •
+    embed.set_footer(text=footer_text, icon_url=footer_icon_url)
 
     return embed, file

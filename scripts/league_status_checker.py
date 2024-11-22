@@ -8,8 +8,6 @@ from time import sleep, time
 from configs.config import base_url, headers, IMPORTANT_LEAGUES, LEAGUE_STATUS, FIXTURES_PATH, STANDINGS_PATH
 from scripts.setup_directories import get_executable_dir
 
-
-
 def get_league_status(temp_dir=None):
     """
     Fetches current league status data from API and saves to JSON.

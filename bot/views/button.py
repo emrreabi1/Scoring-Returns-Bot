@@ -7,19 +7,16 @@ from configs.config import footer_text, footer_icon_url, embed_color, website_fi
 
 class CombinedView(discord.ui.View):
 
-    def __init__(self, task, author_id, json_stats_path, task_manager, all_stats_dict):
+    def __init__(self, task, author_id, task_manager, all_stats_dict):
         super().__init__(timeout=None)
         self.task = task
         self.author_id = author_id
-        self.json_stats_path = json_stats_path
 
         self.fixture_json = 0
         
         self.all_stats_dict = all_stats_dict
 
-
         self.last_clicks_full_stats = {}
-        self.last_clicks_15_analysis = {}
 
         self.task_manager = task_manager
 
