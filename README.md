@@ -75,6 +75,18 @@ This Discord bot provides **comprehensive real-time football match tracking**, d
    python bot/main.py
    ```
 
+### Alternative: GUI Setup (Recommended)
+Run the executable for an all-in-one setup interface:
+```bash
+python executable.py
+```
+
+This provides a user-friendly GUI where you can:
+- Configure all environment variables
+- Fetch and select leagues to track
+- Run setup scripts
+- Start/stop the bot
+
 ## Executable Version
 For non-technical users, download the executable from [Releases](https://github.com/BernKing/Scoring-Returns-Bot/releases) which provides a GUI for all setup and configuration options.
 
