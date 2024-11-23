@@ -2,7 +2,7 @@
   <h1>Scoring Returns Bot</h1>
   <br/>
   
-  <p><i>A powerful Discord bot that tracks live football matches and provides real-time updates, statistics, and events, similar to popular sports platforms like FlashScore and LiveScore. <br/>Created by <a href="https://github.com/BernKing">@BernKing</a>.</i></p>
+  <p><i>A powerful Discord bot that tracks live football matches and provides real-time updates, statistics, and events, similar to popular sports platforms like FlashScore and LiveScore. <br/>Created by <a href="https://x.com/bernKing20">@bernKing20</a>.</i></p>
   <br />
 </div>
 
@@ -88,7 +88,7 @@ This provides a user-friendly GUI where you can:
 - Start/stop the bot
 
 ## Executable Version
-For non-technical users, download the executable from [Releases](https://github.com/BernKing/Scoring-Returns-Bot/releases) which provides a GUI for all setup and configuration options.
+For non-technical users, download the executable from [Releases](https://github.com/BernKing/Scoring-Returns-Bot/releases) which provides a GUI for all setup and configuration options. There is a full tutorial on how to use the executable [here](https://bernking.xyz/2024/Scoring-Returns-Bot/).
 
 ## Featured Images
 
@@ -101,6 +101,10 @@ For non-technical users, download the executable from [Releases](https://github.
   <img src="assets/images/bot4.png" alt="Bot Preview 4" width="250"/>
   <img src="assets/images/bot5.png" alt="Bot Preview 5" width="250"/>
 </p>
+
+## Full Write-Up
+
+For a detailed explanation of the project, visit the full write-up at [my blog](https://bernking.xyz/2024/Scoring-Returns-Bot/).
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
