@@ -88,7 +88,7 @@ This provides a user-friendly GUI where you can:
 - Start/stop the bot
 
 ## Executable Version
-For non-technical users, download the executable from [Releases](https://github.com/BernKing/Scoring-Returns-Bot/releases) which provides a GUI for all setup and configuration options. There is a full tutorial on how to use the executable [here](https://bernking.xyz/2024/Scoring-Returns-Bot/).
+For non-technical users, download the executable from [Releases](https://github.com/BernKing/Scoring-Returns-Bot/releases) which provides a GUI for all setup and configuration options. There is a full tutorial on how to use the executable [here](https://bernking.xyz/2024/Scoring-Returns-Bot/). For the bot to work, the executable must be opened and running at all times.
 
 ## Featured Images
 

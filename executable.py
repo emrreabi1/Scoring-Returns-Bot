@@ -15,6 +15,28 @@ from scripts.setup_directories import create_directories, get_executable_dir
 import json
 from configs.config import LEAGUES_JSON_PATH
 
+def create_default_env():
+    default_env = """BOT_TOKEN=your_discord_bot_token_here
+RAPIDAPI_KEY=your_rapidapi_key_here
+FOOTER_ICON_URL=https://i.imgur.com/JQsILIF.png
+THUMBNAIL_LOGO=https://i.imgur.com/ykPOOnv.png
+EMBED_COLOR=5763719
+FOOTER_TEXT="Scoring Returns"
+WEBSITE_NAME="BernKing Blog"
+WEBSITE_URL=https://bernking.xyz/
+MAX_SIMULTANEOUS_GAMES=3
+LOOP_WAIT_TIME=120
+IMPORTANT_LEAGUES=5"""
+    
+    try:
+        with open(".env", "w") as f:
+            f.write(default_env)
+    except Exception as e:
+        print(f"Failed to create default .env file: {str(e)}")
+
+if not os.path.exists(".env"):
+    create_default_env()
+
 def load_available_leagues():
     try:
         with open(LEAGUES_JSON_PATH, 'r', encoding='utf-8') as f:
@@ -95,10 +117,6 @@ class SetupWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle(f"Scoring Returns Bot Setup v{self.VERSION}")
         self.setMinimumSize(800, 600)
-        
-        # Create default .env if it doesn't exist
-        if not os.path.exists(".env"):
-            self.create_default_env()
         
         # Create tab widget
         self.tabs = QTabWidget()
@@ -573,25 +591,6 @@ class SetupWindow(QMainWindow):
             
             # Add change tracking to checkboxes
             checkbox.stateChanged.connect(self.mark_unsaved_changes)
-
-    def create_default_env(self):
-        default_env = """BOT_TOKEN=your_discord_bot_token_here
-RAPIDAPI_KEY=your_rapidapi_key_here
-FOOTER_ICON_URL=https://i.imgur.com/JQsILIF.png
-THUMBNAIL_LOGO=https://i.imgur.com/ykPOOnv.png
-EMBED_COLOR=5763719
-FOOTER_TEXT="Scoring Returns"
-WEBSITE_NAME="BernKing Blog"
-WEBSITE_URL=https://bernking.xyz/
-MAX_SIMULTANEOUS_GAMES=3
-LOOP_WAIT_TIME=120
-IMPORTANT_LEAGUES=5"""
-        
-        try:
-            with open(".env", "w") as f:
-                f.write(default_env)
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to create default .env file: {str(e)}")
 
     def mark_unsaved_changes(self):
         self.has_unsaved_changes = True

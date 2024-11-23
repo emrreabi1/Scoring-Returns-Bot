@@ -9,32 +9,32 @@ base_url = "https://v3.football.api-sports.io"
 
 headers = {
     'x-rapidapi-host': "v3.football.api-sports.io",
-    'x-rapidapi-key': os.getenv('RAPIDAPI_KEY')
+    'x-rapidapi-key': os.getenv('RAPIDAPI_KEY', 'your_rapidapi_key_here')
 }
 
 #Bot token from discord developer portal
-BOT_TOKEN = os.getenv('BOT_TOKEN')
+BOT_TOKEN = os.getenv('BOT_TOKEN', 'your_discord_bot_token_here')
 
-footer_icon_url = os.getenv('FOOTER_ICON_URL')
-thumbnail_logo = os.getenv('THUMBNAIL_LOGO')
+footer_icon_url = os.getenv('FOOTER_ICON_URL', 'https://i.imgur.com/JQsILIF.png')
+thumbnail_logo = os.getenv('THUMBNAIL_LOGO', 'https://i.imgur.com/ykPOOnv.png')
 
 #Embed Color
-embed_color = int(os.getenv('EMBED_COLOR'))
+embed_color = int(os.getenv('EMBED_COLOR', '5763719'))
 
 # Footer text
-footer_text = os.getenv('FOOTER_TEXT')
+footer_text = os.getenv('FOOTER_TEXT', 'Scoring Returns')
 
 # Website link configuration
-website_name = os.getenv('WEBSITE_NAME')
-website_url = os.getenv('WEBSITE_URL')
+website_name = os.getenv('WEBSITE_NAME', 'BernKing Blog')
+website_url = os.getenv('WEBSITE_URL', 'https://bernking.xyz/')
 website_field_name = "Check it out:"
 
 #The amount of games that can a user can be following at once
-MAX_SIMULTANEOUS_GAMES = int(os.getenv('MAX_SIMULTANEOUS_GAMES'))
+MAX_SIMULTANEOUS_GAMES = int(os.getenv('MAX_SIMULTANEOUS_GAMES', '3'))
 
 # League IDs from https://dashboard.api-football.com/soccer/ids
 # IDs represent current season competitions
-important_leagues_str = os.getenv('IMPORTANT_LEAGUES', '')
+important_leagues_str = os.getenv('IMPORTANT_LEAGUES', '5')
 IMPORTANT_LEAGUES = [int(id.strip()) for id in important_leagues_str.split(',')] if important_leagues_str else []
 
 # API Rate Limits
@@ -50,7 +50,7 @@ IMPORTANT_LEAGUES = [int(id.strip()) for id in important_leagues_str.split(',')]
 # Default wait time for the loop in seconds
 # Free tier: 120 seconds to stay under 100 requests/day limit
 # Other tiers: 45 seconds is optimal
-LOOP_WAIT_TIME = 120
+LOOP_WAIT_TIME = int(os.getenv('LOOP_WAIT_TIME', '120'))
 
 from pathlib import Path
 
