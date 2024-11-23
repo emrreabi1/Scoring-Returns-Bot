@@ -96,6 +96,10 @@ class SetupWindow(QMainWindow):
         self.setWindowTitle(f"Scoring Returns Bot Setup v{self.VERSION}")
         self.setMinimumSize(800, 600)
         
+        # Create default .env if it doesn't exist
+        if not os.path.exists(".env"):
+            self.create_default_env()
+        
         # Create tab widget
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
@@ -107,6 +111,13 @@ class SetupWindow(QMainWindow):
         
         self.bot_thread = None
         self.load_env_vars()
+        
+        self.has_unsaved_changes = False
+        self.tabs.currentChanged.connect(self.check_unsaved_changes)
+        
+        # Track changes in env inputs
+        for input_field in self.env_inputs.values():
+            input_field.textChanged.connect(self.mark_unsaved_changes)
 
     def init_env_tab(self):
         env_tab = QWidget()
@@ -128,7 +139,7 @@ class SetupWindow(QMainWindow):
             'WEBSITE_NAME': 'Website Name',
             'WEBSITE_URL': 'Website URL',
             'MAX_SIMULTANEOUS_GAMES': 'Max Simultaneous Games (default: 3)',
-            'LOOP_WAIT_TIME': 'Loop Wait Time (default: 45)'
+            'LOOP_WAIT_TIME': 'Loop Wait Time (default: 120)'
         }
         
         for var, desc in env_vars.items():
@@ -284,7 +295,26 @@ class SetupWindow(QMainWindow):
         try:
             with open(".env", "w") as f:
                 f.write(env_content)
-            QMessageBox.information(self, "Success", "Environment variables saved successfully!")
+            self.has_unsaved_changes = False
+            
+            # Different behavior for exe vs script
+            if getattr(sys, 'frozen', False):
+                # Running as exe - do auto-restart
+                QMessageBox.information(
+                    self, 
+                    "Restarting", 
+                    "Environment variables saved successfully! The application will now restart."
+                )
+                subprocess.Popen([sys.executable])
+                QApplication.quit()
+            else:
+                # Running as script - just show message
+                QMessageBox.information(
+                    self, 
+                    "Saved", 
+                    "Environment variables saved successfully! Please restart the application for changes to take effect."
+                )
+            
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to save environment variables: {str(e)}")
 
@@ -443,14 +473,20 @@ class SetupWindow(QMainWindow):
     def fetch_leagues(self):
         """Fetch and display available leagues"""
         try:
-            temp_dir = Path("temp")
+            # Use absolute path relative to executable
+            exe_dir = get_executable_dir()
+            temp_dir = Path(exe_dir) / "temp"
             temp_dir.mkdir(exist_ok=True)
             
             try:
                 from scripts.league_status_checker import get_league_status
+                status_file = temp_dir / "league_status.json"
                 get_league_status(temp_dir=temp_dir)
                 
-                with open(temp_dir / "league_status.json", 'r', encoding='utf-8') as f:
+                if not status_file.exists():
+                    raise FileNotFoundError(f"League status file not created at {status_file}")
+                
+                with open(status_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     
                     leagues_data = {
@@ -478,9 +514,14 @@ class SetupWindow(QMainWindow):
                         for league in leagues_data['leagues']
                     }
                     
+                    if not leagues_data['leagues']:
+                        raise ValueError("No leagues found in the data")
+                    
                     self.populate_leagues(leagues_data)
                     self.league_frame.show()
                     
+            except Exception as e:
+                raise Exception(f"Error processing leagues: {str(e)}")
             finally:
                 # Cleanup temp directory
                 if temp_dir.exists():
@@ -489,7 +530,10 @@ class SetupWindow(QMainWindow):
                     temp_dir.rmdir()
                 
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to fetch leagues: {str(e)}")
+            error_msg = f"Failed to fetch leagues: {str(e)}"
+            QMessageBox.critical(self, "Error", error_msg)
+            # Add logging to help debug
+            print(f"Error in fetch_leagues: {error_msg}")
 
     def populate_leagues(self, data):
         """Populate league checkboxes from saved data"""
@@ -499,26 +543,70 @@ class SetupWindow(QMainWindow):
             checkbox.deleteLater()
         self.league_checkboxes.clear()
         
-        # Sort leagues by country, then name
-        leagues = sorted(data['leagues'], key=lambda x: (x['country'], x['name']))
-        
-        # Create checkboxes with country info
-        for league in leagues:
-            league_id = str(league['id'])
-            checkbox = QCheckBox(f"{league['country']} - {league['name']} ({league_id})")
-            self.league_checkboxes[league_id] = checkbox
-            self.league_layout.addWidget(checkbox)
-        
-        # Load selected leagues from .env
+        # Get currently selected leagues from .env
+        selected_leagues = set()
         if os.path.exists(".env"):
             with open(".env", "r") as f:
                 for line in f:
                     if line.startswith("IMPORTANT_LEAGUES="):
                         _, value = line.strip().split("=", 1)
-                        selected_leagues = value.split(",")
-                        for league_id in selected_leagues:
-                            if league_id.strip() in self.league_checkboxes:
-                                self.league_checkboxes[league_id.strip()].setChecked(True)
+                        selected_leagues = set(value.split(","))
+        
+        # Sort leagues by selection status, country, then name
+        leagues = sorted(data['leagues'], 
+                        key=lambda x: (
+                            str(x['id']) not in selected_leagues,  # Selected leagues first
+                            x['country'], 
+                            x['name']
+                        ))
+        
+        # Create checkboxes
+        for league in leagues:
+            league_id = str(league['id'])
+            checkbox = QCheckBox(f"{league['country']} - {league['name']} ({league_id})")
+            self.league_checkboxes[league_id] = checkbox
+            self.league_layout.addWidget(checkbox)
+            
+            # Set checked state
+            if league_id in selected_leagues:
+                checkbox.setChecked(True)
+            
+            # Add change tracking to checkboxes
+            checkbox.stateChanged.connect(self.mark_unsaved_changes)
+
+    def create_default_env(self):
+        default_env = """BOT_TOKEN=your_discord_bot_token_here
+RAPIDAPI_KEY=your_rapidapi_key_here
+FOOTER_ICON_URL=https://i.imgur.com/JQsILIF.png
+THUMBNAIL_LOGO=https://i.imgur.com/ykPOOnv.png
+EMBED_COLOR=5763719
+FOOTER_TEXT="Scoring Returns"
+WEBSITE_NAME="BernKing Blog"
+WEBSITE_URL=https://bernking.xyz/
+MAX_SIMULTANEOUS_GAMES=3
+LOOP_WAIT_TIME=120
+IMPORTANT_LEAGUES=5"""
+        
+        try:
+            with open(".env", "w") as f:
+                f.write(default_env)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to create default .env file: {str(e)}")
+
+    def mark_unsaved_changes(self):
+        self.has_unsaved_changes = True
+
+    def check_unsaved_changes(self, new_tab_index):
+        if self.has_unsaved_changes and self.tabs.widget(new_tab_index) != self.tabs.widget(0):  # 0 is env tab
+            reply = QMessageBox.warning(
+                self,
+                "Unsaved Changes",
+                "You have unsaved environment changes. Save them before proceeding?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.Yes
+            )
+            if reply == QMessageBox.StandardButton.Yes:
+                self.save_env()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
